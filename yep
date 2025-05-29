@@ -1,0 +1,284 @@
+# 1.a. Write a Python program to check whether a given number is even or odd.
+num = int(input("Enter a number: "))  # 1.a
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+
+# 1.b. Write a Python program to calculate the factorial of a number using recursion.
+def factorial(n):  # 1.b
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+n = int(input("Enter a number for factorial: "))
+print("Factorial:", factorial(n))
+
+# 1.c. Write a Python program to find the largest of three numbers using if-else statements.
+a = int(input("Enter first number: "))  # 1.c
+b = int(input("Enter second number: "))
+c = int(input("Enter third number: "))
+if a >= b and a >= c:
+    print("Largest:", a)
+elif b >= a and b >= c:
+    print("Largest:", b)
+else:
+    print("Largest:", c)
+
+# 1.d. Write a Python program to print the multiplication table of a given number.
+n = int(input("Enter number for multiplication table: "))  # 1.d
+for i in range(1, 11):
+    print(f"{n} x {i} = {n*i}")
+
+# 2.a. Write a Python program using a lambda function to find the product of two numbers.
+prod = lambda x, y: x * y  # 2.a
+print("Product:", prod(3, 4))
+
+# 2.b. Write a Python program using a lambda function to sort a list of tuples based on the second element.
+lst = [(1, 2), (3, 1), (5, 0)]  # 2.b
+lst_sorted = sorted(lst, key=lambda x: x[1])
+print("Sorted by second element:", lst_sorted)
+
+# 2.c. Write a Python program where a function returns a lambda function that multiplies a number by a given factor.
+def multiplier(factor):  # 2.c
+    return lambda x: x * factor
+double = multiplier(2)
+print("Double 5:", double(5))
+
+# 2.d. Write a Python function that takes two numbers as arguments and returns their sum.
+def add(x, y):  # 2.d
+    return x + y
+print("Sum:", add(5, 7))
+
+# 3.a. Write a Python program demonstrating encapsulation using a class Bank Account with private attributes __balance and methods to deposit and withdraw money.
+class BankAccount:  # 3.a
+    def __init__(self, balance=0):
+        self.__balance = balance
+    def deposit(self, amount):
+        self.__balance += amount
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+        else:
+            print("Insufficient funds")
+    def get_balance(self):
+        return self.__balance
+
+acc = BankAccount(1000)
+acc.deposit(500)
+acc.withdraw(200)
+print("Balance:", acc.get_balance())
+
+# 3.b. Write a Python program that uses operator overloading to add two Vector objects using the + operator.
+class Vector:  # 3.b
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+
+v1 = Vector(1, 2)
+v2 = Vector(3, 4)
+v3 = v1 + v2
+print(v3)
+
+# 4.a. Write a Python class that implements an iterator to return even numbers up to a given limit.
+class EvenIterator:  # 4.a
+    def __init__(self, limit):
+        self.limit = limit
+        self.num = 0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        self.num += 2
+        if self.num > self.limit:
+            raise StopIteration
+        return self.num
+
+even_iter = EvenIterator(10)
+for num in even_iter:
+    print(num, end=' ')
+print()
+
+# 4.b. Write a Python program that demonstrates the use of the iter() function on a list and manually retrieves elements using the next() function until a Stop Iteration exception is encountered.
+lst = [10, 20, 30]  # 4.b
+it = iter(lst)
+try:
+    while True:
+        print(next(it))
+except StopIteration:
+    print("Iteration complete")
+
+# 5.a. Write a Python program that prints the current working directory, lists files in a directory, and prints the Python version using the os and sys modules.
+import os, sys  # 5.a
+print("Current working directory:", os.getcwd())
+print("Files in directory:", os.listdir())
+print("Python version:", sys.version)
+
+# 5.b. Write a Python program that uses the math module to compute the square root, factorial, and greatest common divisor (GCD) of given numbers.
+import math  # 5.b
+x = 16
+y = 5
+z = 25
+print("Square root of", x, "is", math.sqrt(x))
+print("Factorial of", y, "is", math.factorial(y))
+print("GCD of", x, "and", z, "is", math.gcd(x, z))
+
+# 6.a.1 Write a Python program to create a NumPy array of 5 zeros and another array of 5 ones.
+import numpy as np  # 6.a.1
+zeros = np.zeros(5)
+ones = np.ones(5)
+print("Zeros:", zeros)
+print("Ones:", ones)
+
+# 6.a.2 Write a Python program to create a NumPy array with values between 1 and 10, spaced by 0.5.
+arr = np.arange(1, 10.5, 0.5)  # 6.a.2
+print("Array with step 0.5:", arr)
+
+# 6.b.1 Write a Python program to compute the mean, median, and standard deviation of a NumPy array.
+arr = np.array([1, 2, 3, 4, 5])  # 6.b.1
+print("Mean:", np.mean(arr))
+print("Median:", np.median(arr))
+print("Std Dev:", np.std(arr))
+
+# 6.b.2 Write a Python program to find unique elements in a NumPy array.
+arr = np.array([1, 2, 2, 3, 4, 4, 5])  # 6.b.2
+print("Unique elements:", np.unique(arr))
+
+# 7.a. Create a Pandas Data Frame from a Dictionary. The dictionary should contain passenger details such as name, age, and fare. Then, display the created Data Frame.
+import pandas as pd  # 7.a
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 22],
+    'Fare': [100, 150, 120]
+}
+df = pd.DataFrame(data)
+print(df)
+
+# 7.b.1 Read the Titanic dataset from a CSV file (titanic.csv) into a Pandas Data Frame and display the first few rows.
+titanic = pd.read_csv('titanic.csv')  # 7.b.1
+print(titanic.head())
+
+# 7.b.2 Filter the dataset to select only the rows where the passenger's age is greater than 30, and display the filtered results.
+filtered = titanic[titanic['Age'] > 30]  # 7.b.2
+print(filtered)
+
+# 7.b.3 Replace missing values in the age column with a default value (e.g., 30) and display the updated Data Frame.
+titanic['Age'].fillna(30, inplace=True)  # 7.b.3
+print(titanic.head())
+
+# 7.b.4 Remove any rows containing missing values from the dataset and display the cleaned Data Frame.
+cleaned = titanic.dropna()  # 7.b.4
+print(cleaned.head())
+
+# 7.b.5 Determine and display the maximum and minimum values in the age column.
+print("Max Age:", titanic['Age'].max())  # 7.b.5
+print("Min Age:", titanic['Age'].min())
+
+# 8.1 Determine the number of unique orders using the `order_id` column.
+chipotle = pd.read_csv('chipotle.csv')  # 8.1
+print("Unique orders:", chipotle['order_id'].nunique())
+
+# 8.2 Calculate the average revenue per order.
+chipotle['item_price'] = chipotle['item_price'].replace('[\$,]', '', regex=True).astype(float)
+avg_revenue = chipotle.groupby('order_id')['item_price'].sum().mean()
+print("Average revenue per order:", avg_revenue)
+
+# 8.3 Find out how many different items are sold (unique values in `item_name`).
+print("Unique items sold:", chipotle['item_name'].nunique())
+
+# 8.3.a List the top 5 items by total quantity sold.
+top5 = chipotle.groupby('item_name')['quantity'].sum().sort_values(ascending=False).head(5)
+print("Top 5 items by quantity:\n", top5)
+
+# 8.4 Count the number of unique values in the `choice_description` column.
+print("Unique choice_description:", chipotle['choice_description'].nunique())
+
+# 8.5 Identify the order with the highest total bill amount.
+order_totals = chipotle.groupby('order_id')['item_price'].sum()
+max_order = order_totals.idxmax()
+print("Order with highest bill:", max_order, "Amount:", order_totals.max())
+
+# 8.6 Find all items that have inconsistent pricing (same `item_name` but different `item_price` values).
+inconsistent = chipotle.groupby('item_name')['item_price'].nunique()
+print("Items with inconsistent pricing:", inconsistent[inconsistent > 1])
+
+# 8.7 List orders where any single item was ordered in a quantity greater than 5.
+orders_gt5 = chipotle[chipotle['quantity'] > 5]['order_id'].unique()
+print("Orders with quantity > 5:", orders_gt5)
+
+# 8.8 Calculate the average price of an item.
+avg_item_price = chipotle.groupby('item_name')['item_price'].mean().mean()
+print("Average price of an item:", avg_item_price)
+
+# 8.9 List all unique item prices and show the items associated with each price.
+unique_prices = chipotle.groupby('item_price')['item_name'].unique()
+print("Unique item prices and items:\n", unique_prices)
+
+# 8.10 Display all orders that included *Canned Soda*.
+canned_soda_orders = chipotle[chipotle['item_name'].str.contains('Canned Soda', na=False)]
+print("Orders with Canned Soda:\n", canned_soda_orders)
+
+# 9.1 Rank employees based on their salary within their department.
+employee = pd.read_csv('Employee.csv')  # 9.1
+employee['Rank'] = employee.groupby('Department')['Salary'].rank(ascending=False)
+print(employee[['Name', 'Department', 'Salary', 'Rank']])
+
+# 9.2 Which JoiningYear has the most employees still in the company?
+print("JoiningYear with most employees still in company:", employee[employee['Status'] == 'Working']['JoiningYear'].mode()[0])
+
+# 9.3 Find employees who are above 50 years old and still working.
+above50 = employee[(employee['Age'] > 50) & (employee['Status'] == 'Working')]
+print("Employees above 50 and working:\n", above50)
+
+# 9.4 Compute average salary increase trend (assuming salary grows by 5% annually since joining).
+employee['Years'] = 2025 - employee['JoiningYear']
+employee['SalaryTrend'] = employee['Salary'] * (1.05 ** employee['Years'])
+print("Average salary increase trend:", employee['SalaryTrend'].mean())
+
+# 9.5 Create bins of Age and find average salary for each bin.
+bins = pd.cut(employee['Age'], bins=[20, 30, 40, 50, 60, 70])
+print(employee.groupby(bins)['Salary'].mean())
+
+# 9.6 Create a pivot table showing total number of employees by JoiningYear and Department.
+pivot = employee.pivot_table(index='JoiningYear', columns='Department', values='Name', aggfunc='count')
+print("Pivot table:\n", pivot)
+
+# 9.7 Identify if remote work is more common in a specific department.
+print(employee.groupby('Department')['RemoteWork'].mean())
+
+# 9.8 Find standard deviation of salaries for each department.
+print(employee.groupby('Department')['Salary'].std())
+
+# 9.9 Plot a histogram of Performance Score for male employees.
+import matplotlib.pyplot as plt
+male_perf = employee[employee['Gender'] == 'Male']['PerformanceScore']
+plt.hist(male_perf, bins=10)
+plt.title('Performance Score for Male Employees')
+plt.xlabel('Score')
+plt.ylabel('Frequency')
+plt.show()
+
+# 9.10 How does Work Hours PerWeek affect the chance of leaving the company? Find top 5 highest earning employees in each department.
+print(employee.groupby('WorkHoursPerWeek')['LeftCompany'].mean())
+top5 = employee.groupby('Department').apply(lambda x: x.nlargest(5, 'Salary'))
+print("Top 5 highest earning employees in each department:\n", top5)
+
+# 10.a Write a Python program that demonstrates the use of the iter() function on a list and manually retrieves elements using the next() function until a Stop Iteration exception is encountered.
+lst = [1, 2, 3, 4]  # 10.a
+it = iter(lst)
+try:
+    while True:
+        print(next(it))
+except StopIteration:
+    print("End of list reached.")
+
+# 10.b Write a Python program to search for and extract all phone numbers from a given block of text. Assume phone numbers can be in formats like (123) 456-7890 or 123-456-7890.
+import re  # 10.b
+text = """
+Contact us at (123) 456-7890 or 987-654-3210 for more information.
+"""
+phones = re.findall(r'\(?\d{3}\)?[-\s]?\d{3}-\d{4}', text)
+print("Phone numbers found:", phones)
